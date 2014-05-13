@@ -1,3 +1,3 @@
 dotfiles
 ========
-** Hugh Van dotfiles **
+## Hugh Van dotfiles
