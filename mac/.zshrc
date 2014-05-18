@@ -86,4 +86,7 @@ setopt nocorrectall
 path+=( ~/Library/Python/2.7/bin )
 
 . ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
-
+# virtualenvwrapper settings
+export WORKON_HOME=$HOME/Envs
+export PROJECT_HOME=$HOME/Devel
+source /usr/local/bin/virtualenvwrapper.sh
