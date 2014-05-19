@@ -40,9 +40,9 @@
 
 
 " Quicksave command
- noremap <C-Z> :update<CR>
- vnoremap <C-Z> <C-C>:update<CR>
- inoremap <C-Z> <C-O>:update<CR>
+ noremap <Leader>w :update<CR>
+ vnoremap <Leader>w <C-C>:update<CR>
+ inoremap <Leader>w <C-O>:update<CR>
 
 
 " Quick quit command
@@ -57,6 +57,9 @@
  map <c-l> <c-w>l
  map <c-h> <c-w>h
 
+" map jk and kj to ESC
+inoremap jk <esc>
+inoremap kj <esc>
 
 " easier moving between tabs
  map <Leader>n <esc>:tabprevious<CR>
@@ -210,3 +213,6 @@
 " mkdir -p ~/.vim/ftplugin
 " wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
  set nofoldenable
+
+ " NerdCommenter settings
+ filetype plugin on
