@@ -8,6 +8,12 @@
 " ============================================
 
 
+" Setup Pathogen to manage your plugins
+" mkdir -p ~/.vim/autoload ~/.vim/bundle
+" curl -so ~/.vim/autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/HEAD/autoload/pathogen.vim
+" Now you can install any plugin into a .vim/bundle/plugin-name/ folder
+ call pathogen#infect()
+
 " Automatic reloading of .vimrc
  autocmd! bufwritepost .vimrc source %
 
@@ -24,12 +30,32 @@
  set mouse=a  " on OSX press ALT and click
  set bs=2     " make backspace behave like normal again
 
+" Useful settings
+ set history=700
+ set undolevels=700
+
+
+" Make search case insensitive
+ set hlsearch
+ set incsearch
+ set ignorecase
+ set smartcase
+
+
+" Disable stupid backup and swap files - they trigger too many events
+" for file system watchers
+ set nobackup
+ set nowritebackup
+ set noswapfile
 
 " Rebind <Leader> key
 " I like to have it here becuase it is easier to reach than the default and
 " it is next to ``m`` and ``n`` which I use for navigating between tabs.
  let mapleader = ","
 
+
+ 
+" -------- KEY BINDING SETTINGS ----
 
 " Bind nohl
 noremap <Leader>h :nohl<CR>
@@ -61,6 +87,10 @@ inoremap jj <esc>
  map <Leader>m <esc>:tabnext<CR>
 
 
+" easier formatting of paragraphs
+ vmap Q gq
+ nmap Q gqap
+
 " map sort function to a key
 " vnoremap <Leader>s :sort<CR>
 
@@ -71,6 +101,10 @@ inoremap jj <esc>
  vnoremap < <gv  " better indentation
  vnoremap > >gv  " better indentation
 
+
+ 
+ 
+" -------  THEMES - FONTS - GUI --------
 
 " Show whitespace
 " MUST be inserted BEFORE the colorscheme command
@@ -101,14 +135,22 @@ inoremap jj <esc>
  highlight ColorColumn ctermbg=233
 
 
-" easier formatting of paragraphs
- vmap Q gq
- nmap Q gqap
+" Settings for vim-powerline -- Ubutu settings only here -- MODIFY it for
+" Windows and MAC OS
+" cd ~/.vim/bundle
+" git clone git://github.com/Lokaltog/vim-powerline.git
+" see here for powerline for multiple apps on Ubuntu
+" http://askubuntu.com/questions/283908/how-can-i-install-and-use-powerline-plugin
+ set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+ set laststatus=2
 
 
-" Useful settings
- set history=700
- set undolevels=700
+
+
+
+" ============================================================================
+" Python IDE Setup
+" ============================================================================
 
 
 " Real programmers don't use TABs but spaces
@@ -117,41 +159,6 @@ inoremap jj <esc>
  set shiftwidth=4
  set shiftround
  set expandtab
-
-
-" Make search case insensitive
- set hlsearch
- set incsearch
- set ignorecase
- set smartcase
-
-
-" Disable stupid backup and swap files - they trigger too many events
-" for file system watchers
- set nobackup
- set nowritebackup
- set noswapfile
-
-
-" Setup Pathogen to manage your plugins
-" mkdir -p ~/.vim/autoload ~/.vim/bundle
-" curl -so ~/.vim/autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/HEAD/autoload/pathogen.vim
-" Now you can install any plugin into a .vim/bundle/plugin-name/ folder
- call pathogen#infect()
-
-
-" ============================================================================
-" Python IDE Setup
-" ============================================================================
-
-
-" Settings for vim-powerline
-" cd ~/.vim/bundle
-" git clone git://github.com/Lokaltog/vim-powerline.git
-" see here for powerline for multiple apps on Ubuntu
-" http://askubuntu.com/questions/283908/how-can-i-install-and-use-powerline-plugin
- set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
- set laststatus=2
 
 
 " Settings for ctrlp
