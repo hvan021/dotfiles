@@ -35,9 +35,9 @@
 noremap <Leader>h :nohl<CR>
 
 " Quicksave command
- noremap <Leader>w :update<CR>
- vnoremap <Leader>w <C-C>:update<CR>
- inoremap <Leader>w <C-O>:update<CR>
+ noremap <Leader>s :update<CR>
+ vnoremap <Leader>s <C-C>:update<CR>
+ inoremap <Leader>s <C-O>:update<CR>
 
 
 " Quick quit command
@@ -53,8 +53,8 @@ noremap <Leader>h :nohl<CR>
  map <c-h> <c-w>h
 
 " map jk and kj to ESC
-inoremap jk <esc>
-inoremap kj <esc>
+inoremap jj <esc>
+"inoremap kj <esc>
 
 " easier moving between tabs
  map <Leader>n <esc>:tabprevious<CR>
@@ -62,7 +62,7 @@ inoremap kj <esc>
 
 
 " map sort function to a key
- vnoremap <Leader>s :sort<CR>
+" vnoremap <Leader>s :sort<CR>
 
 
 " easier moving of code blocks
