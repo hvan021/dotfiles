@@ -6,7 +6,7 @@
 " Note to myself:
 " DO NOT USE <C-z> FOR SAVING WHEN PRESENTING!
 " ============================================
-
+ set encoding=utf-8
 
 " Setup Pathogen to manage your plugins
 " mkdir -p ~/.vim/autoload ~/.vim/bundle
@@ -48,14 +48,14 @@
  set nowritebackup
  set noswapfile
 
+
+" -------- KEY BINDING SETTINGS ----
+
 " Rebind <Leader> key
 " I like to have it here becuase it is easier to reach than the default and
 " it is next to ``m`` and ``n`` which I use for navigating between tabs.
  let mapleader = ","
 
-
- 
-" -------- KEY BINDING SETTINGS ----
 
 " Bind nohl
 noremap <Leader>h :nohl<CR>
@@ -145,6 +145,25 @@ inoremap jj <esc>
  set laststatus=2
 
 
+" ============================================================================
+" CUSTOMIZED FUNCTIONS
+" ============================================================================ " Awesome line number magic
+
+" Awesome line number magic
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <Leader>l :call NumberToggle()<cr>
+:au FocusLost * set number
+:au FocusGained * set relativenumber
+autocmd InsertEnter * set number
+autocmd InsertLeave * set relativenumber
+set relativenumber
 
 
 
