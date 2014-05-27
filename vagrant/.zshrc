@@ -72,3 +72,8 @@ export PATH="/home/hugh/.local/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
+
+# Virtualenvwrapper settings
+ export WORKON_HOME=$HOME/Envs
+ export PROJECT_HOME=$HOME/Dev
+ source /usr/local/bin/virtualenvwrapper.sh
