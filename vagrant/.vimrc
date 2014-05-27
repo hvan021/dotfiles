@@ -6,7 +6,13 @@
 " Note to myself:
 " DO NOT USE <C-z> FOR SAVING WHEN PRESENTING!
 " ============================================
+ set encoding=utf-8
 
+" Setup Pathogen to manage your plugins
+" mkdir -p ~/.vim/autoload ~/.vim/bundle
+" curl -so ~/.vim/autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/HEAD/autoload/pathogen.vim
+" Now you can install any plugin into a .vim/bundle/plugin-name/ folder
+ call pathogen#infect()
 
 " Automatic reloading of .vimrc
  autocmd! bufwritepost .vimrc source %
@@ -24,6 +30,26 @@
  set mouse=a  " on OSX press ALT and click
  set bs=2     " make backspace behave like normal again
 
+" Useful settings
+ set history=700
+ set undolevels=700
+
+
+" Make search case insensitive
+ set hlsearch
+ set incsearch
+ set ignorecase
+ set smartcase
+
+
+" Disable stupid backup and swap files - they trigger too many events
+" for file system watchers
+ set nobackup
+ set nowritebackup
+ set noswapfile
+
+
+" -------- KEY BINDING SETTINGS ----
 
 " Rebind <Leader> key
 " I like to have it here becuase it is easier to reach than the default and
@@ -32,17 +58,12 @@
 
 
 " Bind nohl
-" Removes highlight of your last search
-" ``<C>`` stands for ``CTRL`` and therefore ``<C-n>`` stands for ``CTRL+n``
- noremap <C-n> :nohl<CR>
- vnoremap <C-n> :nohl<CR>
- inoremap <C-n> :nohl<CR>
-
+noremap <Leader>h :nohl<CR>
 
 " Quicksave command
- noremap <C-Z> :update<CR>
- vnoremap <C-Z> <C-C>:update<CR>
- inoremap <C-Z> <C-O>:update<CR>
+ noremap <Leader>s :update<CR>
+ vnoremap <Leader>s <C-C>:update<CR>
+ inoremap <Leader>s <C-O>:update<CR>
 
 
 " Quick quit command
@@ -57,14 +78,21 @@
  map <c-l> <c-w>l
  map <c-h> <c-w>h
 
+" map jk and kj to ESC
+inoremap jj <esc>
+"inoremap kj <esc>
 
 " easier moving between tabs
  map <Leader>n <esc>:tabprevious<CR>
  map <Leader>m <esc>:tabnext<CR>
 
 
+" easier formatting of paragraphs
+ vmap Q gq
+ nmap Q gqap
+
 " map sort function to a key
- vnoremap <Leader>s :sort<CR>
+" vnoremap <Leader>s :sort<CR>
 
 
 " easier moving of code blocks
@@ -73,6 +101,10 @@
  vnoremap < <gv  " better indentation
  vnoremap > >gv  " better indentation
 
+
+ 
+ 
+" -------  THEMES - FONTS - GUI --------
 
 " Show whitespace
 " MUST be inserted BEFORE the colorscheme command
@@ -103,14 +135,41 @@
  highlight ColorColumn ctermbg=233
 
 
-" easier formatting of paragraphs
- vmap Q gq
- nmap Q gqap
+" Settings for vim-powerline -- Ubutu settings only here -- MODIFY it for
+" Windows and MAC OS
+" cd ~/.vim/bundle
+" git clone git://github.com/Lokaltog/vim-powerline.git
+" see here for powerline for multiple apps on Ubuntu
+" http://askubuntu.com/questions/283908/how-can-i-install-and-use-powerline-plugin
+ set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+ set laststatus=2
 
 
-" Useful settings
- set history=700
- set undolevels=700
+" ============================================================================
+" CUSTOMIZED FUNCTIONS
+" ============================================================================ " Awesome line number magic
+
+" Awesome line number magic
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <Leader>l :call NumberToggle()<cr>
+:au FocusLost * set number
+:au FocusGained * set relativenumber
+autocmd InsertEnter * set number
+autocmd InsertLeave * set relativenumber
+set relativenumber
+
+
+
+" ============================================================================
+" Python IDE Setup
+" ============================================================================
 
 
 " Real programmers don't use TABs but spaces
@@ -119,41 +178,6 @@
  set shiftwidth=4
  set shiftround
  set expandtab
-
-
-" Make search case insensitive
- set hlsearch
- set incsearch
- set ignorecase
- set smartcase
-
-
-" Disable stupid backup and swap files - they trigger too many events
-" for file system watchers
- set nobackup
- set nowritebackup
- set noswapfile
-
-
-" Setup Pathogen to manage your plugins
-" mkdir -p ~/.vim/autoload ~/.vim/bundle
-" curl -so ~/.vim/autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/HEAD/autoload/pathogen.vim
-" Now you can install any plugin into a .vim/bundle/plugin-name/ folder
- call pathogen#infect()
-
-
-" ============================================================================
-" Python IDE Setup
-" ============================================================================
-
-
-" Settings for vim-powerline
-" cd ~/.vim/bundle
-" git clone git://github.com/Lokaltog/vim-powerline.git
-" see here for powerline for multiple apps on Ubuntu
-" http://askubuntu.com/questions/283908/how-can-i-install-and-use-powerline-plugin
- set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
- set laststatus=2
 
 
 " Settings for ctrlp
@@ -210,3 +234,6 @@
 " mkdir -p ~/.vim/ftplugin
 " wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
  set nofoldenable
+
+ " NerdCommenter settings
+ filetype plugin on
