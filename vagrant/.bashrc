@@ -105,3 +105,11 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+
+# Virtualenvwrapper settings
+ if [ -f /usr/local/bin/virtualenvwrapper.sh ] ; then 
+    export WORKON_HOME=$HOME/Envs
+    export PROJECT_HOME=$HOME/Dev
+    source /usr/local/bin/virtualenvwrapper.sh
+ fi
+
