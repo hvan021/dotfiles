@@ -63,7 +63,7 @@ noremap <Leader>h :nohl<CR>
 " Quicksave command
  noremap <Leader>s :update<CR>
  vnoremap <Leader>s <C-C>:update<CR>
- inoremap <Leader>s <C-O>:update<CR>
+ inoremap <Leader>s <Esc>:update<CR>
 
 
 " Quick quit command
