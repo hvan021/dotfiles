@@ -84,7 +84,7 @@ noremap <Leader>h :nohl<CR>
 " Quicksave command
  noremap <Leader>s :update<CR>
  vnoremap <Leader>s <C-C>:update<CR>
- inoremap <Leader>s <C-O>:update<CR>
+ inoremap <Leader>s <Esc>:update<CR>
 
 
 " Quick quit command
@@ -168,7 +168,7 @@ nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
 " No bullshit folding magic
 " =========================
 set foldmethod=indent
-set foldnestmax=2
+"set foldnestmax=2
 nnoremap <space> zA
 vnoremap <space> zA
 
