@@ -9,6 +9,7 @@ set encoding=utf-8
 " Now you can install any plugin into a .vim/bundle/plugin-name/ folder
  call pathogen#infect()
 
+
 " Enable syntax highlighting
 " You need to reload this file for the change to apply
 filetype off
@@ -358,79 +359,79 @@ autocmd! BufWritePost,FileWritePost *.less call s:CompileLess()
 " MAC SETTINGS ONLY
 " ============================================================================
 
-" Automatic reloading of .vimrc
- autocmd! bufwritepost .vimrc source %
-
-" Fixing the copy & paste madness
-" ================================
-" vmap <C-y> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>:call system("xclip -i", getreg("\""))<CR>
-" nmap <C-v> :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
-" imap <C-v> <Esc><C-v>a
+"" Fixing the copy & paste madness
+"" ================================
+"" vmap <C-y> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>:call system("xclip -i", getreg("\""))<CR>
+"" nmap <C-v> :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
+"" imap <C-v> <Esc><C-v>a
 
 
-set grepprg=ack\ -k
+"set grepprg=ack\ -k
 
 
-" Settings for vim-powerline -- Ubutu settings only here -- MODIFY it for
-" Windows and MAC OS
-" cd ~/.vim/bundle
-" git clone git://github.com/Lokaltog/vim-powerline.git
-" see here for powerline for multiple apps on Ubuntu
-" http://askubuntu.com/questions/283908/how-can-i-install-and-use-powerline-plugin
-"""" Ubuntu settings
-" set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
-" set laststatus=2
+"" Settings for vim-powerline -- Ubutu settings only here -- MODIFY it for
+"" Windows and MAC OS
+"" cd ~/.vim/bundle
+"" git clone git://github.com/Lokaltog/vim-powerline.git
+"" see here for powerline for multiple apps on Ubuntu
+"" http://askubuntu.com/questions/283908/how-can-i-install-and-use-powerline-plugin
+""""" Ubuntu settings
+"" set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+"" set laststatus=2
 
-" Settings for vim-powerline
-" ===========================
+"" Settings for vim-powerline
+"" ===========================
 
-"source /usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/source_plugin.vim
-source ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim/plugin/powerline.vim
-let g:Powerline_symbols = 'fancy'
+""source /usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/source_plugin.vim
+"source ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim/plugin/powerline.vim
+"let g:Powerline_symbols = 'fancy'
 
 
 " ===========================================================================
 " WINDOWS SETTINGS ONLY
 " ===========================================================================
-"set nocompatible
-""source $VIMRUNTIME/vimrc_example.vim
-""source $VIMRUNTIME/mswin.vim
-""behave mswin
+set nocompatible
+"source $VIMRUNTIME/vimrc_example.vim
+"source $VIMRUNTIME/mswin.vim
+"behave mswin
 
-""Set vim full screen
-""set lines=55 columns=200
- "set lines=65 columns=125
-"" winpos 65 1
-"set textwidth=80
-":autocmd GUIEnter * winpos 65 1
+" Automatic reloading of .vimrc
+ autocmd! bufwritepost _vimrc source %
 
-""set line no, buffer, search, highlight, autoindent and more.
-"set nu
-"set hidden
-"set ignorecase
-"set incsearch
-"set smartcase
-"set showmatch
-"set autoindent
-"set ruler
-"set vb
-"set noerrorbells
-"set showcmd
-"set mouse=a
-"set history=1000
-"set undolevels=1000
-"set cursorline
+"Set vim full screen
+"set lines=55 columns=200
+ set lines=65 columns=125
+" winpos 65 1
+set textwidth=80
+:autocmd GUIEnter * winpos 65 1
 
-"au FileChangedShell * echo "Warning: File changed on disk"
+"set line no, buffer, search, highlight, autoindent and more.
+set nu
+set hidden
+set ignorecase
+set incsearch
+set smartcase
+set showmatch
+set autoindent
+set ruler
+set vb
+set noerrorbells
+set showcmd
+set mouse=a
+set history=1000
+set undolevels=1000
+set cursorline
 
-"" Color scheme
-"colorscheme wombat256mod
-"set guifont=Consolas:h10 " Windows only
-""set guifontwide=NSimSun " display Chinese characters properly
-"let g:Powerline_symbols = 'unicode'
+au FileChangedShell * echo "Warning: File changed on disk"
 
-"" quick edit .vimrc in a vertical split window
-"nnoremap <Leader>ev :vsplit $MYVIMRC<Cr>
+" Color scheme
+colorscheme wombat256mod
+set guifont=Consolas:h10 " Windows only
+"set guifontwide=NSimSun " display Chinese characters properly
+let g:Powerline_symbols = 'unicode'
+
+" quick edit .vimrc in a vertical split window
+nnoremap <Leader>ev :vsplit $MYVIMRC<Cr>
 
 
 
