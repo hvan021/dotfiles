@@ -91,7 +91,8 @@ set tags=./tags
  map <c-h> <c-w>h
 
 " map jk and kj to ESC
- inoremap jj <esc>
+ inoremap jk <esc>
+ vnoremap jk <esc>
 "inoremap kj <esc>
 
 " easier moving between tabs
