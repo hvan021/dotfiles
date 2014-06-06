@@ -1,5 +1,8 @@
+" ============================================================================ 
+" --------  --------
+" ============================================================================ 
 " ============================================================================
-" ----- VIM GENERAL SETTINGS -----
+" -------- VIM GENERAL SETTINGS --------
 " ============================================================================
 set encoding=utf-8
 
@@ -32,9 +35,6 @@ let g:html_indent_style1 = "inc"
  set pastetoggle=<F2>
  set clipboard=unnamed
 
-" General option
-" ===============
-
 set wildmode=list:longest " make TAB behave like in a shell
 set autoread " reload file when changes happen in other editors
 set tags=./tags
@@ -60,7 +60,7 @@ set tags=./tags
  set noswapfile
 
 " ============================================================================ 
-" -------- KEY BINDING SETTINGS ----
+" -------- KEY BINDING SETTINGS --------
 " ============================================================================ 
 
 " Rebind <Leader> key
@@ -77,11 +77,13 @@ set tags=./tags
  vnoremap <Leader>s <C-C>:update<CR>
  inoremap <Leader>s <Esc>:update<CR>
 
-
 " Quick quit command
  noremap <Leader>e :quit<CR>  " Quit current window
  noremap <Leader>E :qa!<CR>   " Quit all windows
 
+" insert new line in normal mode
+nmap <S-Enter> O<Esc>j
+nmap <CR> o<Esc>k
 
 " bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
 " Every unnecessary keystroke that can be saved is good for your health :)
@@ -98,14 +100,12 @@ set tags=./tags
  map gT <esc>:tabprevious<CR>
  map gt <esc>:tabnext<CR>
 
-
 " easier formatting of paragraphs
  vmap Q gq
  nmap Q gqap
 
 " map sort function to a key
 " vnoremap <Leader>s :sort<CR>
-
 
 " easier moving of code blocks
 " Try to go into visual mode (v), thenselect several lines of code here and
@@ -124,24 +124,23 @@ map <Leader>a ggVG  " select all
 
 " Vertical split windows
 nnoremap <Leader>w <C-w>v<C-w>l
-
-" NERDTree mapping
-map      <C-n> :NERDTree<CR>
-
  
 " ============================================================================ 
 " -------  THEMES - FONTS - GUI --------
 " ============================================================================ 
 
+" =========================
 " Show trailing whitespace
 " =========================
 " MUST be inserted BEFORE the colorscheme command
  autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
  au InsertLeave * match ExtraWhitespace /\s\+$/
 
+" =========================
 " Color scheme
 " mkdir -p ~/.vim/colors && cd ~/.vim/colors
 " wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=13400
+" =========================
  set t_Co=256
  color wombat256mod
  set colorcolumn=80
@@ -153,6 +152,7 @@ map      <C-n> :NERDTree<CR>
  set nowrap  " don't automatically wrap on load
  set fo-=t   " don't automatically wrap text when typing
 
+" =========================
 " No bullshit folding magic
 " =========================
 set foldmethod=indent
@@ -165,14 +165,18 @@ vnoremap <space> zA
 
 set laststatus=2
 
+" =========================
 " show tab number and modify status
+" =========================
 set guitablabel=%N.\ %t\ %M " Show tab numbers
 
 " ============================================================================
 " CUSTOMIZED FUNCTIONS
-" ============================================================================ " Awesome line number magic
+" ============================================================================
 
+" =========================
 " Awesome line number magic
+" =========================
 function! NumberToggle()
   if(&relativenumber == 1)
     set number
@@ -188,7 +192,9 @@ autocmd InsertEnter * set number
 autocmd InsertLeave * set relativenumber
 set relativenumber
 
+" =========================
 " Convert case
+" =========================
 function! TwiddleCase(str)
     if a:str ==# toupper(a:str)
         let result = tolower(a:str)
@@ -203,10 +209,17 @@ vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 
 
 " ============================================================================
-" ADD-ON & PLUGGINS
+" ********** ADD-ON & PLUGGINS **********
 " ============================================================================
 
+" =====================
+" NERDTree mapping
+" =====================
+map      <C-n> :NERDTree<CR>
+
+" =====================
 " NerdCommenter settings
+" =====================
  filetype plugin on
 
 " Settings for ctrlp
@@ -214,15 +227,16 @@ vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 " git clone https://github.com/kien/ctrlp.vim.git
  let g:ctrlp_max_height = 30
 
-
+" =====================
 " DelimitMate 
 " git clone https://github.com/Raimondi/delimitMate
-" ===========
+" =====================
 let delimitMate_expand_cr = 1
 
+" =====================
 " UltiSnips
 " git clone https://github.com/sirver/ultisnips
-" =========
+" =====================
 "set runtimepath+=~/.vim/bundle/UltiSnips
 "set runtimepath+=~/.vim/snippets
 "let g:UltiSnipsSnippetsDir = "~/.vim/snippets/"
@@ -231,6 +245,7 @@ let delimitMate_expand_cr = 1
 "let g:UltiSnipsJumpForwardTrigger="<tab>"
 "let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
+" ======================================
 "original settings from Ultisnips  github
 " ======================================
 "" Track the engine.
@@ -248,16 +263,15 @@ let delimitMate_expand_cr = 1
 "let g:UltiSnipsEditSplit="vertical"
 
 
+" =====================
 " Omnicomplete related stuff
+" =====================
 set completeopt=longest,menuone
 inoremap <c-space> <C-x><C-o>
 inoremap <c-@> <C-x><C-o>
 
-"--SuperTab Integration
-set completeopt-=previewtj
-let g:SuperTabDefaultCompletionType = ""
-let g:SuperTabDefaultCompletionType = "context"
-
+" Better navigating through omnicomplete option list
+" See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
 " found here: http://stackoverflow.com/a/2170800/70778
 function! OmniPopup(action)
     if pumvisible()
@@ -272,15 +286,24 @@ endfunction
 inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
 inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
 
+" =====================
+" SuperTab Integration
+" =====================
+set completeopt-=previewtj
+let g:SuperTabDefaultCompletionType = ""
+let g:SuperTabDefaultCompletionType = "context"
 
+" =====================
 " Settings for jedi-vim
 " =====================
-let g:jedi#usages_command = "<leader>n"
-"let g:jedi#popup_on_dot = 0
-let g:jedi#popup_select_first = 0
-map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+" cd ~/.vim/bundle
+" git clone git://github.com/davidhalter/jedi-vim.git
+ let g:jedi#usages_command = "<leader>z"
+ "let g:jedi#popup_on_dot = 0
+ let g:jedi#popup_select_first = 0
+"" map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
-
+" ==========================
 " Settings for vim-markdown
 " ==========================
 " let g:vim_markdown_folding_disabled=1
@@ -290,18 +313,18 @@ let g:vim_markdown_initial_foldlevel=1
 " map <Leader>v :source ~/.vimrc
 
 " Compile bootstrap.css when saving a .less file
-func! s:CompileLess()
-    lcd %:p:h
-    let static_dir = finddir('static', ';')
-    let l:cmd = "cd " . l:static_dir . " && lessc css/bootstrap.less css/bootstrap.css"
-    let l:cmd2 = "cd " . l:static_dir . " && lessc css2/bootstrap.less css2/bootstrap.css"
-    let l:errs = system(l:cmd)
-    let l:errs = system(l:cmd2)
-    if (!empty(l:errs))
-        echo l:errs
-    endif
-endfunc
-autocmd! BufWritePost,FileWritePost *.less call s:CompileLess()
+"func! s:CompileLess()
+    "lcd %:p:h
+    "let static_dir = finddir('static', ';')
+    "let l:cmd = "cd " . l:static_dir . " && lessc css/bootstrap.less css/bootstrap.css"
+    "let l:cmd2 = "cd " . l:static_dir . " && lessc css2/bootstrap.less css2/bootstrap.css"
+    "let l:errs = system(l:cmd)
+    "let l:errs = system(l:cmd2)
+    "if (!empty(l:errs))
+        "echo l:errs
+    "endif
+"endfunc
+"autocmd! BufWritePost,FileWritePost *.less call s:CompileLess()
 
 " BEGIN things for Java development
 " =============================================================================
@@ -345,29 +368,7 @@ autocmd! BufWritePost,FileWritePost *.less call s:CompileLess()
  set wildignore+=*_build/*
  set wildignore+=*/coverage/*
 
-" Settings for jedi-vim
-" cd ~/.vim/bundle
-" git clone git://github.com/davidhalter/jedi-vim.git
- let g:jedi#usages_command = "<leader>z"
- let g:jedi#popup_on_dot = 0
- let g:jedi#popup_select_first = 0
- map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
-" Better navigating through omnicomplete option list
-" See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
- set completeopt=longest,menuone
- function! OmniPopup(action)
-     if pumvisible()
-         if a:action == 'j'
-             return "\<C-N>"
-         elseif a:action == 'k'
-             return "\<C-P>"
-         endif
-     endif
-     return a:action
- endfunction
- inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
- inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
 
 " Python folding
 " mkdir -p ~/.vim/ftplugin
