@@ -171,44 +171,6 @@ set laststatus=2
 set guitablabel=%N.\ %t\ %M " Show tab numbers
 
 " ============================================================================
-" CUSTOMIZED FUNCTIONS
-" ============================================================================
-
-" =========================
-" Awesome line number magic
-" =========================
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set number
-  else
-    set relativenumber
-  endif
-endfunc
-
-nnoremap <Leader>l :call NumberToggle()<cr>
-:au FocusLost * set number
-:au FocusGained * set relativenumber
-autocmd InsertEnter * set number
-autocmd InsertLeave * set relativenumber
-set relativenumber
-
-" =========================
-" Convert case
-" =========================
-function! TwiddleCase(str)
-    if a:str ==# toupper(a:str)
-        let result = tolower(a:str)
-    elseif a:str ==# tolower(a:str)
-        let result = substitute(a:str,'\(\<\w\+\>\)', '\u\1', 'g')
-    else
-        let result = toupper(a:str)
-    endif
-    return result
-endfunction
-vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
-
-
-" ============================================================================
 " ********** ADD-ON & PLUGGINS **********
 " ============================================================================
 
@@ -399,6 +361,44 @@ let g:vim_markdown_initial_foldlevel=1
 "    djangoProject is name of your django project, which is going just after '/home/sergey/workspace/django'
 "
 "Finally, save it and restart vim. Now, after '.', you press default ctrl-x ctrl-o to get your autocomplete.
+
+" ============================================================================
+" CUSTOMIZED FUNCTIONS
+" ============================================================================
+
+" =========================
+" Awesome line number magic
+" =========================
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <Leader>l :call NumberToggle()<cr>
+:au FocusLost * set number
+:au FocusGained * set relativenumber
+autocmd InsertEnter * set number
+autocmd InsertLeave * set relativenumber
+set relativenumber
+
+" =========================
+" Convert case
+" =========================
+function! TwiddleCase(str)
+    if a:str ==# toupper(a:str)
+        let result = tolower(a:str)
+    elseif a:str ==# tolower(a:str)
+        let result = substitute(a:str,'\(\<\w\+\>\)', '\u\1', 'g')
+    else
+        let result = toupper(a:str)
+    endif
+    return result
+endfunction
+vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
+
 
 
 " ============================================================================
