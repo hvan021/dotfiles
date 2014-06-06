@@ -14,12 +14,13 @@ set encoding=utf-8
 filetype off
 filetype plugin indent on
 syntax on
+autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType java set completeopt-=preview
-autocmd Filetype java setlocal completefunc=javacomplete#CompleteParamsInfo
-autocmd Filetype java setlocal omnifunc=javacomplete#Complete
+"autocmd FileType java set completeopt-=preview
+"autocmd Filetype java setlocal completefunc=javacomplete#CompleteParamsInfo
+"autocmd Filetype java setlocal omnifunc=javacomplete#Complete
 
 let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
@@ -90,12 +91,12 @@ set tags=./tags
  map <c-h> <c-w>h
 
 " map jk and kj to ESC
- inoremap jj <esc>
+ inoremap jk <esc>
 "inoremap kj <esc>
 
 " easier moving between tabs
- map <Leader>n <esc>:tabprevious<CR>
- map <Leader>m <esc>:tabnext<CR>
+ map gT <esc>:tabprevious<CR>
+ map gt <esc>:tabnext<CR>
 
 
 " easier formatting of paragraphs
@@ -111,11 +112,6 @@ set tags=./tags
 " then press ``>`` several times.
  vnoremap < <gv  " better indentation
  vnoremap > >gv  " better indentation
-
-
-map <Leader>n <esc>:tabprevious<CR>
-map <Leader>m <esc>:tabnext<CR>
-vnoremap <Leader>s :sort<CR>
 
 " new settings
 map <Leader>a ggVG  " select all
@@ -169,6 +165,8 @@ vnoremap <space> zA
 
 set laststatus=2
 
+" show tab number and modify status
+set guitablabel=%N.\ %t\ %M " Show tab numbers
 
 " ============================================================================
 " CUSTOMIZED FUNCTIONS
@@ -217,19 +215,37 @@ vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
  let g:ctrlp_max_height = 30
 
 
-" DelimitMate
+" DelimitMate 
+" git clone https://github.com/Raimondi/delimitMate
 " ===========
 let delimitMate_expand_cr = 1
 
 " UltiSnips
+" git clone https://github.com/sirver/ultisnips
 " =========
-set runtimepath+=~/.vim/bundle/UltiSnips
-set runtimepath+=~/.vim/snippets
-let g:UltiSnipsSnippetsDir = "~/.vim/snippets/"
-let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'snippets']
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+"set runtimepath+=~/.vim/bundle/UltiSnips
+"set runtimepath+=~/.vim/snippets
+"let g:UltiSnipsSnippetsDir = "~/.vim/snippets/"
+"let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'snippets']
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<tab>"
+"let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+"original settings from Ultisnips  github
+" ======================================
+"" Track the engine.
+"Plugin 'SirVer/ultisnips'
+
+"" Snippets are separated from the engine. Add this if you want them:
+"Plugin 'honza/vim-snippets'
+
+"" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+"" If you want :UltiSnipsEdit to split your window.
+"let g:UltiSnipsEditSplit="vertical"
 
 
 " Omnicomplete related stuff
@@ -237,6 +253,10 @@ set completeopt=longest,menuone
 inoremap <c-space> <C-x><C-o>
 inoremap <c-@> <C-x><C-o>
 
+"--SuperTab Integration
+set completeopt-=previewtj
+let g:SuperTabDefaultCompletionType = ""
+let g:SuperTabDefaultCompletionType = "context"
 
 " found here: http://stackoverflow.com/a/2170800/70778
 function! OmniPopup(action)
@@ -256,7 +276,7 @@ inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
 " Settings for jedi-vim
 " =====================
 let g:jedi#usages_command = "<leader>n"
-let g:jedi#popup_on_dot = 0
+"let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
 map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
@@ -353,6 +373,32 @@ autocmd! BufWritePost,FileWritePost *.less call s:CompileLess()
 " mkdir -p ~/.vim/ftplugin
 " wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
  set nofoldenable
+
+ " see here http://blog.dispatched.ch/2009/05/24/vim-as-python-ide/
+
+" see here http://stackoverflow.com/questions/978643/vim-python-and-django-autocompletion-pysmell
+"
+" To make work autocomplete, add this lines in your .vimrc:
+"
+"    autocmd FileType python set omnifunc=pythoncomplete#Complete
+"
+"    if has("python")
+"
+"    python import sys,os
+"
+"    python sys.path.append('/home/sergey/workspace/django')
+"
+"    python os.environ['DJANGO_SETTINGS_MODULE'] = 'djangoProject.settings'
+"
+"    endif
+"
+"where:
+"
+"    sys.path.append is path to your django workspace directory
+"    djangoProject is name of your django project, which is going just after '/home/sergey/workspace/django'
+"
+"Finally, save it and restart vim. Now, after '.', you press default ctrl-x ctrl-o to get your autocomplete.
+
 
 " ============================================================================
 " MAC SETTINGS ONLY
