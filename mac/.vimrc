@@ -1,133 +1,142 @@
-" ============================================================================ 
-" --------  --------
-" ============================================================================ 
+    " ============================================================================
+    " --------  --------
+    " ============================================================================
+    " ============================================================================
+    " -------- VIM GENERAL SETTINGS --------
+    " ============================================================================
+    set encoding=utf-8
+    "set guioptions=gtrLme
+    " Setup Pathogen to manage your plugins
+    " mkdir -p ~/.vim/autoload ~/.vim/bundle
+    " curl -so ~/.vim/autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/HEAD/autoload/pathogen.vim
+    " Now you can install any plugin into a .vim/bundle/plugin-name/ folder
+    call pathogen#infect()
+
+    " Enable syntax highlighting
+    " You need to reload this file for the change to apply
+    filetype off
+    filetype plugin indent on
+    syntax on
+    autocmd FileType python set omnifunc=pythoncomplete#Complete
+    autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+    "autocmd FileType java set completeopt-=preview
+    "autocmd Filetype java setlocal completefunc=javacomplete#CompleteParamsInfo
+    "autocmd Filetype java setlocal omnifunc=javacomplete#Complete
+
+    let g:html_indent_inctags = "html,body,head,tbody"
+    let g:html_indent_script1 = "inc"
+    let g:html_indent_style1 = "inc"
+
+    " Better copy & paste
+    " When you want to paste large blocks of code into vim, press F2 before you
+    " paste. At the bottom you should see ``-- INSERT (paste) --``.
+    set pastetoggle=<F2>
+    set clipboard=unnamed
+
+    set wildmode=list:longest " make TAB behave like in a shell
+    set autoread " reload file when changes happen in other editors
+    set tags=./tags
+
+    " Mouse and backspace
+    set mouse=a  " on OSX press ALT and click
+    set bs=2     " make backspace behave like normal again
+
+    " Useful settings
+    set history=700
+    set undolevels=700
+
+    " Make search case insensitive
+    set hlsearch
+    set incsearch
+    set ignorecase
+    set smartcase
+
+    " Disable stupid backup and swap files - they trigger too many events
+    " for file system watchers
+    set nobackup
+    set nowritebackup
+    set noswapfile
+
+    " ============================================================================
+    " -------- KEY BINDING SETTINGS --------
+    " ============================================================================
+
+    " Rebind <Leader> key
+    " I like to have it here becuase it is easier to reach than the default and
+    " it is next to ``m`` and ``n`` which I use for navigating between tabs.
+    let mapleader = ","
+    " nnoremap . <NOP>
+
+    " Bind nohl
+    noremap <Leader>h :nohl<CR>
+
+    " Quicksave command
+    noremap <Leader>s :update<CR>
+    vnoremap <Leader>s <C-C>:update<CR>
+    inoremap <Leader>s <Esc>:update<CR>
+
+    " Quick quit command
+    noremap <Leader>e :quit<CR>  " Quit current window
+    noremap <Leader>E :qa!<CR>   " Quit all windows
+
+    " insert new line in normal mode
+    nmap <S-Enter> O<Esc>j
+    nmap <CR> o<Esc>k
+
+    " bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
+    " Every unnecessary keystroke that can be saved is good for your health :)
+    map <c-j> <c-w>j
+    map <c-k> <c-w>k
+    map <c-l> <c-w>l
+    map <c-h> <c-w>h
+
+    " provide hjkl movements in Insert mode via the <Alt> modifier key
+    inoremap <A-h> <C-o>h
+    inoremap <A-j> <C-o>j
+    inoremap <A-k> <C-o>k
+    inoremap <A-l> <C-o>l
+
+    " map jk and kj to ESC
+    inoremap jk <esc>
+    "inoremap kj <esc>
+
+    " easier moving between tabs
+    "map gT <esc>:tabprevious<CR>
+    "map gt <esc>:tabnext<CR>
+
+    " easier formatting of paragraphs
+    vmap Q gq
+    nmap Q gqap
+
+    " map sort function to a key
+    " vnoremap <Leader>s :sort<CR>
+
+    " easier moving of code blocks
+    " Try to go into visual mode (v), thenselect several lines of code here and
+    " then press ``>`` several times.
+    vnoremap < <gv  " better indentation
+    vnoremap > >gv  " better indentation
+
+    " new settings
+    map <Leader>a ggVG  " select all
+
+    " center the cursor vertically
+    "nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
+
+    " Always try to keep this many lines above and below the cursor
+    set scrolloff=7
+
+    " remove trailing white space
+    map <Leader>x :%s/\s\+$//<cr>
+
+    " Vertical split windows
+    nnoremap <Leader>w <C-w>v<C-w>l
+
 " ============================================================================
-" -------- VIM GENERAL SETTINGS --------
-" ============================================================================
-set encoding=utf-8
-
-" Setup Pathogen to manage your plugins
-" mkdir -p ~/.vim/autoload ~/.vim/bundle
-" curl -so ~/.vim/autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/HEAD/autoload/pathogen.vim
-" Now you can install any plugin into a .vim/bundle/plugin-name/ folder
- call pathogen#infect()
-
-" Enable syntax highlighting
-" You need to reload this file for the change to apply
-filetype off
-filetype plugin indent on
-syntax on
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-"autocmd FileType java set completeopt-=preview
-"autocmd Filetype java setlocal completefunc=javacomplete#CompleteParamsInfo
-"autocmd Filetype java setlocal omnifunc=javacomplete#Complete
-
-let g:html_indent_inctags = "html,body,head,tbody"
-let g:html_indent_script1 = "inc"
-let g:html_indent_style1 = "inc"
-
-" Better copy & paste
-" When you want to paste large blocks of code into vim, press F2 before you
-" paste. At the bottom you should see ``-- INSERT (paste) --``.
- set pastetoggle=<F2>
- set clipboard=unnamed
-
-set wildmode=list:longest " make TAB behave like in a shell
-set autoread " reload file when changes happen in other editors
-set tags=./tags
-
-" Mouse and backspace
- set mouse=a  " on OSX press ALT and click
- set bs=2     " make backspace behave like normal again
-
-" Useful settings
- set history=700
- set undolevels=700
-
-" Make search case insensitive
- set hlsearch
- set incsearch
- set ignorecase
- set smartcase
-
-" Disable stupid backup and swap files - they trigger too many events
-" for file system watchers
- set nobackup
- set nowritebackup
- set noswapfile
-
-" ============================================================================ 
-" -------- KEY BINDING SETTINGS --------
-" ============================================================================ 
-
-" Rebind <Leader> key
-" I like to have it here becuase it is easier to reach than the default and
-" it is next to ``m`` and ``n`` which I use for navigating between tabs.
- let mapleader = ","
-" nnoremap . <NOP>
-
-" Bind nohl
- noremap <Leader>h :nohl<CR>
-
-" Quicksave command
- noremap <Leader>s :update<CR>
- vnoremap <Leader>s <C-C>:update<CR>
- inoremap <Leader>s <Esc>:update<CR>
-
-" Quick quit command
- noremap <Leader>e :quit<CR>  " Quit current window
- noremap <Leader>E :qa!<CR>   " Quit all windows
-
-" insert new line in normal mode
-nmap <S-Enter> O<Esc>j
-nmap <CR> o<Esc>k
-
-" bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
-" Every unnecessary keystroke that can be saved is good for your health :)
- map <c-j> <c-w>j
- map <c-k> <c-w>k
- map <c-l> <c-w>l
- map <c-h> <c-w>h
-
-" map jk and kj to ESC
- inoremap jk <esc>
-"inoremap kj <esc>
-
-" easier moving between tabs
- map gT <esc>:tabprevious<CR>
- map gt <esc>:tabnext<CR>
-
-" easier formatting of paragraphs
- vmap Q gq
- nmap Q gqap
-
-" map sort function to a key
-" vnoremap <Leader>s :sort<CR>
-
-" easier moving of code blocks
-" Try to go into visual mode (v), thenselect several lines of code here and
-" then press ``>`` several times.
- vnoremap < <gv  " better indentation
- vnoremap > >gv  " better indentation
-
-" new settings
-map <Leader>a ggVG  " select all
-
-" center the cursor vertically
-"nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
-
-" remove trailing white space
- map <Leader>x :%s/\s\+$//
-
-" Vertical split windows
-nnoremap <Leader>w <C-w>v<C-w>l
- 
-" ============================================================================ 
 " -------  THEMES - FONTS - GUI --------
-" ============================================================================ 
+" ============================================================================
 
 " =========================
 " Show trailing whitespace
@@ -167,8 +176,111 @@ set laststatus=2
 
 " =========================
 " show tab number and modify status
+" guitablabel and guitabltooltip
 " =========================
-set guitablabel=%N.\ %t\ %M " Show tab numbers
+set showtabline=2             " always show the tab bar
+"if has("gui_running")
+"endif
+
+if has('gui') && has('autocmd') && has('windows')
+    "set up tab labels with tab number, buffer name, number of windows
+   function! GuiTabLabel()
+     let label = ''
+     let bufnrlist = tabpagebuflist(v:lnum)
+     " Add '+' if one of the buffers in the tab page is modified
+     for bufnr in bufnrlist
+       if getbufvar(bufnr, "&modified")
+         let label = '+'
+         break
+       endif
+     endfor
+     " Append the tab number
+     let label .= v:lnum.': '
+     " Append the buffer name
+     let name = bufname(bufnrlist[tabpagewinnr(v:lnum) - 1])
+     if name == ''
+       " give a name to no-name documents
+       if &buftype=='quickfix'
+         let name = '[Quickfix List]'
+       else
+         let name = '[No Name]'
+       endif
+     else
+       " get only the file name
+       let name = fnamemodify(name,":t")
+     endif
+     let label .= name
+     " Append the number of windows in the tab page
+     let wincount = tabpagewinnr(v:lnum, '$')
+     return label . '  [' . wincount . ']'
+   endfunction
+   "set guitablabel=%{GuiTabLabel()}
+
+    " set up tab tooltips with every buffer name
+    function! GuiTabToolTip()
+    let tip = ''
+    let bufnrlist = tabpagebuflist(v:lnum)
+    for bufnr in bufnrlist
+        " separate buffer entries
+        if tip!=''
+        let tip .= " \n "
+        endif
+        " Add name of buffer
+        let name=bufname(bufnr)
+        if name == ''
+        " give a name to no name documents
+        if getbufvar(bufnr,'&buftype')=='quickfix'
+            let name = '[Quickfix List]'
+        else
+            let name = '[No Name]'
+        endif
+        endif
+        let tip.=name
+        " add modified/modifiable flags
+        if getbufvar(bufnr, "&modified")
+        let tip .= ' [+]'
+        endif
+        if getbufvar(bufnr, "&modifiable")==0
+        let tip .= ' [-]'
+        endif
+    endfor
+    return tip
+    endfunction
+    "set guitabtooltip=%{GuiTabToolTip()}
+
+
+    "set guitablabel=%N.\ %t\ %M " Show tab numbers
+    au GUIEnter * set gtl=%{GuiTabLabel()} gtt=%{GuiTabToolTip()}
+    "au GUIEnter * set guitablabel=%N.\ %t\ %M " Show tab numbers
+endif
+
+"set guitablabel=%N.\ %t\ %M " Show tab numbers
+
+
+" ====================
+" Movement between tabs OR buffers
+" ====================
+function! MyNext()
+    if exists( '*tabpagenr' ) && tabpagenr('$') != 1
+        " Tab support && tabs open
+        normal gt
+    else
+        " No tab support, or no tabs open
+        execute ":bnext"
+    endif
+endfunction
+function! MyPrev()
+    if exists( '*tabpagenr' ) && tabpagenr('$') != '1'
+        " Tab support && tabs open
+        normal gT
+    else
+        " No tab support, or no tabs open
+        execute ":bprev"
+    endif
+endfunction
+
+"nnoremap L :call MyNext()<CR>
+"nnoremap H :call MyPrev()<CR>
 
 " ============================================================================
 " ********** ADD-ON & PLUGGINS **********
@@ -190,7 +302,7 @@ map      <C-n> :NERDTree<CR>
  let g:ctrlp_max_height = 30
 
 " =====================
-" DelimitMate 
+" DelimitMate
 " git clone https://github.com/Raimondi/delimitMate
 " =====================
 let delimitMate_expand_cr = 1
@@ -272,7 +384,7 @@ let g:SuperTabDefaultCompletionType = "context"
 let g:vim_markdown_initial_foldlevel=1
 
 
-" map <Leader>v :source ~/.vimrc
+ map <Leader>v :source ~/.vimrc<cr>
 
 " Compile bootstrap.css when saving a .less file
 "func! s:CompileLess()
@@ -481,5 +593,13 @@ let g:Powerline_symbols = 'fancy'
 
 
 
+"let os=substitute(system('uname'), '\n', '', '')
+  "if os == 'Darwin' || os == 'Mac'
+    "set guifont=Menlo:h16
+    "set guicursor+=a:blinkon0
+    "set guioptions+=T
+  "elseif os == 'Linux'
+    "set guifont=Monospace\ 12
+  "endif
 
 
