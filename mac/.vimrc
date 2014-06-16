@@ -148,6 +148,16 @@
 " -------  THEMES - FONTS - GUI --------
 " ============================================================================
 
+if has('win32') || has('win64')
+    set guifont=Consolas:h10
+    "Set vim full screen
+    "set lines=55 columns=200
+    set lines=65 columns=125
+    " winpos 65 1
+    set textwidth=80
+    :autocmd GUIEnter * winpos 65 1
+endif
+
 " =========================
 " Show trailing whitespace
 " =========================
@@ -321,7 +331,7 @@ endfunction
 "let g:Powerline_symbols = 'fancy'
 
     if has('win32') || has('win64')
-        
+       let g:Powerline_symbols = 'unicode' 
     elseif has('mac')
         source ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim/plugin/powerline.vim
         let g:Powerline_suymbols = 'fancy' 
