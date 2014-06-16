@@ -4,6 +4,16 @@
     " ============================================================================
     " -------- VIM GENERAL SETTINGS --------
     " ============================================================================
+    set nocompatible " Must be first line
+
+" Windows Compatible {
+" On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
+" across (heterogeneous) systems easier.
+        if has('win32') || has('win64')
+          set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+        endif
+" }
+
     set encoding=utf-8
     "set guioptions=gtrLme
     " Setup Pathogen to manage your plugins
@@ -182,6 +192,9 @@ set showtabline=2             " always show the tab bar
 "if has("gui_running")
 "endif
 
+" highlight the cursor line
+set cursorline
+
 if has('gui') && has('autocmd') && has('windows')
     "set up tab labels with tab number, buffer name, number of windows
    function! GuiTabLabel()
@@ -285,6 +298,38 @@ endfunction
 " ============================================================================
 " ********** ADD-ON & PLUGGINS **********
 " ============================================================================
+
+" ===================== 
+" Powerline
+" =====================
+
+" Settings for vim-powerline -- Ubutu settings only here -- MODIFY it for
+" Windows and MAC OS
+" cd ~/.vim/bundle
+" git clone git://github.com/Lokaltog/vim-powerline.git
+" see here for powerline for multiple apps on Ubuntu
+" http://askubuntu.com/questions/283908/how-can-i-install-and-use-powerline-plugin
+"""" Ubuntu settings
+" set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+" set laststatus=2
+
+" Settings for vim-powerline
+" ===========================
+
+"source /usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/source_plugin.vim
+"source ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim/plugin/powerline.vim
+"let g:Powerline_symbols = 'fancy'
+
+    if has('win32') || has('win64')
+        
+    elseif has('mac')
+        source ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim/plugin/powerline.vim
+        let g:Powerline_suymbols = 'fancy' 
+    elseif has('linux')
+        set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+        let g:Powerline_suymbols = 'fancy' 
+    endif
+
 
 " =====================
 " NERDTree mapping
@@ -481,19 +526,20 @@ let g:vim_markdown_initial_foldlevel=1
 " =========================
 " Awesome line number magic
 " =========================
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set number
-  else
-    set relativenumber
-  endif
-endfunc
+"function! NumberToggle()
+  "if(&relativenumber == 1)
+    "set number
+  "else
+    "set relativenumber
+  "endif
+"endfunc
 
-nnoremap <Leader>l :call NumberToggle()<cr>
-:au FocusLost * set number
-:au FocusGained * set relativenumber
-autocmd InsertEnter * set number
-autocmd InsertLeave * set relativenumber
+"nnoremap <Leader>l :call NumberToggle()<cr>
+nnoremap <Leader>l :set  relativenumber!<cr>
+":au FocusLost * :set number
+":au FocusGained * :set relativenumber
+"autocmd InsertEnter * :set number
+"autocmd InsertLeave * :set relativenumber
 set relativenumber
 
 " =========================
@@ -544,8 +590,8 @@ set grepprg=ack\ -k
 " ===========================
 
 "source /usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/source_plugin.vim
-source ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim/plugin/powerline.vim
-let g:Powerline_symbols = 'fancy'
+"source ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim/plugin/powerline.vim
+"let g:Powerline_symbols = 'fancy'
 
 
 " ===========================================================================
