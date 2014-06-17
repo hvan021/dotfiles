@@ -4,7 +4,7 @@
     " ============================================================================
     " -------- VIM GENERAL SETTINGS --------
     " ============================================================================
-    set nocompatible " Must be first line
+    "set nocompatible " Must be first line
 
 " Windows Compatible {
 " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
@@ -192,7 +192,6 @@ vnoremap <space> zA
 " When opening the file, unfold all. Fold all with zM
 " au BufRead * normal zR
 
-set laststatus=2
 
 " =========================
 " show tab number and modify status
@@ -335,11 +334,13 @@ endfunction
     elseif has('mac')
         source ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim/plugin/powerline.vim
         let g:Powerline_suymbols = 'fancy' 
-    elseif has('linux')
+    elseif has('unix')
+    "else
         set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
-        let g:Powerline_suymbols = 'fancy' 
+        "let g:Powerline_suymbols = 'fancy' 
     endif
 
+set laststatus=2
 
 " =====================
 " NERDTree mapping
