@@ -419,7 +419,7 @@ inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
 " =====================
 " SuperTab Integration
 " =====================
-set completeopt-=previewtj
+set completeopt-=preview
 let g:SuperTabDefaultCompletionType = ""
 let g:SuperTabDefaultCompletionType = "context"
 
