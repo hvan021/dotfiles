@@ -307,9 +307,30 @@ endfunction
 
 " ============================================================================
 " ********** ADD-ON & PLUGGINS **********
+" cd ~/.vim/bundle
+" git clone https://github.com/kien/ctrlp.vim.git
+" &&
+" git clone https://github.com/Raimondi/delimitMate.git
+" &&
+" git clone https://github.com/mattn/emmet-vim.git
+" &&
+" git clone --recursive https://github.com/davidhalter/jedi-vim.git
+" &&
+" git clone https://github.com/scrooloose/nerdtree.git
+" &&
+" git clone git://github.com/shawncplus/phpcomplete.vim.git
+" &&
+" git clone https://github.com/ervandew/supertab.git
+" &&
+" git clone https://github.com/sirver/ultisnips.git
+" &&
+" git clone git://github.com/tpope/vim-fugitive.git
+" &&
+" git clone https://github.com/scrooloose/nerdcommenter.git
+" &&
+" git clone https://github.com/scrooloose/syntastic.git
 " ============================================================================
-
-" ===================== 
+" =====================
 " Powerline
 " =====================
 
@@ -331,13 +352,13 @@ endfunction
 "let g:Powerline_symbols = 'fancy'
 
     if has('win32') || has('win64')
-       let g:Powerline_symbols = 'unicode' 
+       let g:Powerline_symbols = 'unicode'
     elseif has('mac')
         source ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim/plugin/powerline.vim
-        let g:Powerline_suymbols = 'fancy' 
+        let g:Powerline_suymbols = 'fancy'
     elseif has('linux')
         set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
-        let g:Powerline_suymbols = 'fancy' 
+        let g:Powerline_suymbols = 'fancy'
     endif
 
 
