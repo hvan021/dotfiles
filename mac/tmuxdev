@@ -1,0 +1,17 @@
+tmux has-session -t development
+if [ $? != 0 ]
+then
+    tmux new-session -s development -n vagrant -d
+    tmux send-keys -t development 'cd ~/Dev/djangobox/' C-m
+    #tmux send-keys -t development 'vim' C-m
+    tmux send-keys -t development 'vagrant up && vagrant ssh' C-m
+    tmux split-window -h -t development
+    tmux select-layout -t development main-vertical
+    tmux send-keys -t development:1.2 'cd ~/Dev/djangobox/' C-m
+    tmux send-keys -t development:1.2 'vagrant ssh' C-m
+    tmux new-window -n console -t development
+    tmux send-keys -t development:2 'cd ~/Dev/djangobox/' C-m
+    tmux select-window -t development:1
+    tmux attach -t development
+fi
+tmux attach -t development
