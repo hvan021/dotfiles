@@ -69,6 +69,13 @@
     set nowritebackup
     set noswapfile
 
+    " Return to last edit position when opening files (You want this!)
+    autocmd BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal! g`\"" |
+        \ endif
+    " Remember info about open buffers on close
+    set viminfo^=%
     " ============================================================================
     " -------- KEY BINDING SETTINGS --------
     " ============================================================================
@@ -144,6 +151,36 @@
     " Vertical split windows
     nnoremap <Leader>w <C-w>v<C-w>l
 
+    
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Editing mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remap VIM 0 to first non-blank character
+map 0 ^
+
+" Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
+nmap <M-j> mz:m+<cr>`z
+nmap <M-k> mz:m-2<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+
+if has("mac") || has("macunix")
+  nmap <D-j> <M-j>
+  nmap <D-k> <M-k>
+  vmap <D-j> <M-j>
+  vmap <D-k> <M-k>
+endif
+
+" Delete trailing white space on save, useful for Python and CoffeeScript ;)
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+autocmd BufWrite *.py :call DeleteTrailingWS()
+autocmd BufWrite *.coffee :call DeleteTrailingWS()
+
+
 " ============================================================================
 " -------  THEMES - FONTS - GUI --------
 " ============================================================================
@@ -155,7 +192,7 @@ if has('win32') || has('win64')
     set lines=65 columns=125
     " winpos 65 1
     set textwidth=80
-    :autocmd GUIEnter * winpos 65 1
+    :autocmd GUIEnter * winpos 55 1
 endif
 
 " =========================
